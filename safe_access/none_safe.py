@@ -7,10 +7,10 @@ class NoneSafe:
     >>> NoneSafe(MyObject).my_attribute.__safe__
 
     It works for methods to
-    >>> NoneSafe(MyObject).my_method().__safe__
+    >>> NoneSafe(MyObject).my_method().__
 
     And it coul be stacked
-    >>> NoneSafe(MyObject).my_attribute.my_method().__safe__
+    >>> ~NoneSafe(MyObject).my_attribute.my_method()
     """
     def __init__(self, obj: Any) -> None:
         self.__safe: Any = obj
@@ -21,6 +21,9 @@ class NoneSafe:
 
     @property
     def __(self) -> Any:
+        return self.__safe__
+
+    def __invert__(self) -> Any:
         return self.__safe__
 
     def __getattribute__(self, attr_name: str) -> 'NoneSafe':

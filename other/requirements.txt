@@ -1,0 +1,1 @@
+clipboard==0.0.4  # Used on other.html_viewer

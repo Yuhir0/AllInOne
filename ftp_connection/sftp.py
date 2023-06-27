@@ -1,5 +1,5 @@
 import logging
-from typing import Type
+from typing import Type, TypedDict
 
 import pysftp as pysftp
 
