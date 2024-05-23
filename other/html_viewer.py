@@ -10,6 +10,21 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }}
+        div {{
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap; /* Para mantener los espacios y saltos de línea */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }}
+    </style>
     <title>
         HTML VIEWER
     </title>
