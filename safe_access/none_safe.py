@@ -7,11 +7,12 @@ class NoneSafe:
     >>> NoneSafe(MyObject).my_attribute.__safe__
 
     It works for methods to
-    >>> NoneSafe(MyObject).my_method().__
+    >>> NoneSafe(MyObject).my_method().__safe__
 
     And it coul be stacked
-    >>> ~NoneSafe(MyObject).my_attribute.my_method()
+    >>> NoneSafe(MyObject).my_attribute.my_method().__safe__
     """
+
     def __init__(self, obj: Any) -> None:
         self.__safe: Any = obj
 
@@ -23,10 +24,7 @@ class NoneSafe:
     def __(self) -> Any:
         return self.__safe__
 
-    def __invert__(self) -> Any:
-        return self.__safe__
-
-    def __getattribute__(self, attr_name: str) -> 'NoneSafe':
+    def __getattribute__(self, attr_name: str) -> "NoneSafe":
         try:
             return super(NoneSafe, self).__getattribute__(attr_name)
         except AttributeError:
@@ -35,7 +33,12 @@ class NoneSafe:
                 return NoneSafe(obj.__getattribute__(attr_name))
             return NoneSafe(None)
 
-    def __call__(self, *args, **kwargs) -> 'NoneSafe':
+    def __call__(self, *args: Any, **kwargs: Any) -> "NoneSafe":
         if self.__safe is not None:
             return NoneSafe(self.__safe(*args, **kwargs))
+        return NoneSafe(None)
+
+    def __getitem__(self, item: Any) -> "NoneSafe":
+        if self.__safe is not None:
+            return NoneSafe(self.__safe[item])
         return NoneSafe(None)
