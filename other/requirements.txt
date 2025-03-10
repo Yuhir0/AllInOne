@@ -1,1 +1,2 @@
-clipboard==0.0.4  # Used on other.html_viewer
+clipboard==0.0.4  # Used on html_viewer, sql_data_extractor
+sqlparse==0.5.0  # Used on sql_data_extractor
